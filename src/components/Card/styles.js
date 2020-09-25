@@ -34,7 +34,7 @@ export const Container = styled.div`
         border-radius:0;
         background: transparent;
         box-shadow: none;
-        cursor: grabbing;
+        cursor: ${props => !props.canDrop ? 'no-drop':'grabbing'};
 
         p, img, header {
             opacity: 0;

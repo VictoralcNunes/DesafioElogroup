@@ -7,7 +7,7 @@ import Window from '../Window';
 
 import { Container } from './styles';
 
-const Card = ({lead, index, moveLead, status}) => {
+const Card = ({canDrop, lead, index, moveLead, status}) => {
     const ref= useRef();
     // const {move} = useContext(BoardContext);
 
@@ -61,7 +61,8 @@ const Card = ({lead, index, moveLead, status}) => {
         <Container 
             ref={ref} 
             isDragging={isDragging}
-            onClick={onOpen}>
+            onClick={onOpen}
+            canDrop={canDrop}>
             <p>{lead.costumerTitle}</p>
             
         </Container>

@@ -34,6 +34,28 @@ export const Container = styled.div`
 
   ul{
       margin-top: 30px;
+      z-index:0;
   }
 
+`;
+
+export const CantDropHere = styled.div`
+  padding: 0 15px;
+  height: 100%;
+  flex: 0 0 320px;
+  opacity: ${props => props.done ? 0.6 : 1};
+  display: inline-block;
+
+  
+  text-align: center;
+  background-color: #ddd;
+  color: #777;
+  cursor: not-allowed;
+  z-index: 1;
+
+  span{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
 `;

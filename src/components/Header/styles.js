@@ -5,6 +5,8 @@ export const Container = styled.div`
     padding: 0 30px;
     background: #3a3a39;
     color: #FFF;
+    width: 100%;
+    
 
     display: flex;
     align-items: center;
