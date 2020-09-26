@@ -27,7 +27,12 @@ const Board = () =>{
         });
     };
 
-    const createLead = (lead) => {
+    const createLead = (newLead) => {
+        console.log(newLead);
+        const id = leads.length+1;
+        const {date, status, costumerTitle, costumerName, costumerPhone, constumerEmail, oportunities} = newLead;
+        const newLeadToInclude = {id,date, status, costumerTitle, costumerName, costumerPhone, constumerEmail, oportunities};
+        setLeads( [...leads,newLeadToInclude]);
         return;
     }
 

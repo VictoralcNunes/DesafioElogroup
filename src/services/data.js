@@ -5,7 +5,7 @@ const leads = [{
     costumerTitle: 'Joao S/A',
     costumerName: 'João',
     costumerPhone: '99999-9999',
-    constumerEmail: 'joao@joao.com.br',
+    costumerEmail: 'joao@joao.com.br',
     oportunities:['RPA', 'Produto Digital', 'Analytics', 'BPM'],
 },{
     id:2,
@@ -14,7 +14,7 @@ const leads = [{
     costumerTitle: 'Pedro S/A',
     costumerName: 'Pedro',
     costumerPhone: '99999-9999',
-    constumerEmail: 'pedro@pedro.com.br',
+    costumerEmail: 'pedro@pedro.com.br',
     oportunities:['RPA'],
 },{
     id:3,
@@ -23,7 +23,7 @@ const leads = [{
     costumerTitle: 'Lucas S/A',
     costumerName: 'Lucas',
     costumerPhone: '99999-9999',
-    constumerEmail: 'lucas@lucas.com.br',
+    costumerEmail: 'lucas@lucas.com.br',
     oportunities:['BPM'],
 },{
     id:4,
@@ -32,7 +32,7 @@ const leads = [{
     costumerTitle: 'Tiago S/A',
     costumerName: 'Tiago',
     costumerPhone: '99999-9999',
-    constumerEmail: 'tiago@tiago.com.br',
+    costumerEmail: 'tiago@tiago.com.br',
     oportunities:['RPA', 'Analytics'],
 }]
 const statuses =[{
@@ -54,4 +54,18 @@ const statuses =[{
     done: true,
 }];
 
-export {leads, statuses};
+const oportunities = [{
+    job: 'RPA',
+    image: 'robotic-arm.svg'
+},{
+    job: 'Analytics',
+    image: 'profits.svg'
+},{
+    job: 'Produto Digital',
+    image: 'macbook-pro.svg'
+},{
+    job: 'BPM',
+    image: 'user.svg'
+},]
+
+export {leads, statuses, oportunities};

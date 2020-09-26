@@ -55,7 +55,7 @@ export const CantDropHere = styled.div`
 
   span{
     display: inline-block;
-    vertical-align: middle;
+    align-items: middle;
   }
   
 `;
