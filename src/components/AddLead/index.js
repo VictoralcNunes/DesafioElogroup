@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { MdClose } from 'react-icons/md';
 import { oportunities } from '../../services/data';
@@ -29,6 +29,23 @@ const AddLead = ({ createLead, show, onClose }) => {
     });
     const [selectedOportunities, setSelectedOportunities] = useState([]);
 
+    const [allOportunities, setAllOportunities] = useState(false);
+
+    // const onCheck = () => setAllOportunities(true);
+    // const onUncheck = () => setAllOportunities(false);
+
+    useEffect(()=>{
+        if(allOportunities){
+            setSelectedOportunities(()=>{
+                const op = oportunities.map(o => o.job);
+                return [...op];
+            });
+        }
+        else{
+            setSelectedOportunities([]);
+        }
+    },[allOportunities]);
+
     function handleInput (event){
         let nam = event.target.name;
         let val = event.target.value;
@@ -37,6 +54,10 @@ const AddLead = ({ createLead, show, onClose }) => {
       }
 
     function handleCheckbox (op){
+        if(op==="all"){
+            setAllOportunities(true);
+            return;
+        }
         const alreadySelected = selectedOportunities.findIndex( item => item === op );
 
         if (alreadySelected >= 0){
@@ -129,6 +150,14 @@ const AddLead = ({ createLead, show, onClose }) => {
                         onChange={handleInput}
                     />
                     <p>Oportunidades:</p>
+                    
+                    <input
+                        name="all"            
+                        type="checkbox"
+                        checked={allOportunities}
+                        onChange={()=>handleCheckbox("all")} 
+                    />
+                    <label name="all">Selecionar Todos</label>
                     <ul className="items-grid">
                         {oportunities.map((item,index) => (
                             <li key={"job"+index} 
