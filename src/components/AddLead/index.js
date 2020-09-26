@@ -13,9 +13,6 @@ import dp from '../../assets/macbook-pro.svg';
 Modal.setAppElement('#root');
 
 const AddLead = ({ createLead, show, onClose }) => {
-    // const opKey = (op, id = item.id) => {
-    //     return op.concat(id)
-    // }
 
     const [newLead, setNewLead] = useState({
         id: '',
@@ -30,9 +27,7 @@ const AddLead = ({ createLead, show, onClose }) => {
     const [selectedOportunities, setSelectedOportunities] = useState([]);
 
     const [allOportunities, setAllOportunities] = useState(false);
-
-    // const onCheck = () => setAllOportunities(true);
-    // const onUncheck = () => setAllOportunities(false);
+    const [canUncheck, setCanUncheck] = useState(false);
 
     useEffect(()=>{
         if(allOportunities){
@@ -42,28 +37,58 @@ const AddLead = ({ createLead, show, onClose }) => {
             });
         }
         else{
+            if(canUncheck && selectedOportunities.length>0){
+                return;
+            }
             setSelectedOportunities([]);
+            
         }
     },[allOportunities]);
 
-    function handleInput (event){
+    useEffect(()=>{
+        if(selectedOportunities.length===oportunities.length){
+            setAllOportunities(true);
+        }
+        else{
+            setAllOportunities(false);
+            setCanUncheck(true);
+        }
+    },[selectedOportunities]);
+    // function handleCheckboxAll(state){
+    //     if(allOportunities){
+    //         setSelectedOportunities(()=>{
+    //             const op = oportunities.map(o => o.job);
+    //             return [...op];
+    //         });
+    //     }
+    //     else{
+    //         if(state){
+    //             return;
+    //         }
+    //         setSelectedOportunities([]);
+    //     }
+    // }
+
+    function handleInput(event){
         let nam = event.target.name;
         let val = event.target.value;
         console.log(nam, val);
         setNewLead({...newLead, [nam]: val});
       }
 
-    function handleCheckbox (op){
+    function handleCheckbox(op){
         if(op==="all"){
-            setAllOportunities(true);
+            setAllOportunities(!allOportunities);
+            setCanUncheck(false);
+            // handleCheckboxAll(true);
             return;
         }
         const alreadySelected = selectedOportunities.findIndex( item => item === op );
 
         if (alreadySelected >= 0){
             const filteredItens = selectedOportunities.filter(item => item !== op);
-
             setSelectedOportunities(filteredItens);
+            
         }else {
             setSelectedOportunities([...selectedOportunities, op]);
         }
@@ -116,38 +141,33 @@ const AddLead = ({ createLead, show, onClose }) => {
             </CloseBtnCtn>
             <div>
                 <form onSubmit={handleSubmit}>
-                    {/* <h1>Hello {this.state.username} {this.state.age}</h1> */}
-                    {/* // id:4,
-                    // date: '01/01/2020',
-                    // status: 'Reunião Agendada',
-                    // costumerTitle: 'Tiago S/A',
-                    // costumerName: 'Tiago',
-                    // costumerPhone: '99999-9999',
-                    // constumerEmail: 'tiago@tiago.com.br',
-                    // oportunities:['RPA', 'Analytics'], */}
                     <p>Nome do contato:</p>
                     <input
                         type='text'
                         name='costumerName'
                         onChange={handleInput}
+                        required
                     />
-                    <p>Nome Fantasia:</p>
+                    <p>Nome Fantasia *</p>
                     <input
                         type='text'
                         name='costumerTitle'
                         onChange={handleInput}
+                        required
                     />
-                    <p>Email:</p>
+                    <p>Email *</p>
                     <input
                         type='text'
                         name='costumerEmail'
                         onChange={handleInput}
+                        required
                     />
-                    <p>Telefone:</p>
+                    <p>Telefone *</p>
                     <input
                         type='text'
                         name='costumerPhone'
                         onChange={handleInput}
+                        required
                     />
                     <p>Oportunidades:</p>
                     
