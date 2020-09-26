@@ -5,10 +5,6 @@ import { oportunities } from '../../services/data';
 
 import { CloseBtn, CloseBtnCtn } from './styles';
 import "./AddLead.css";
-import analytics from '../../assets/profits.svg';
-import rpa from '../../assets/robotic-arm.svg';
-import bpm from '../../assets/user.svg';
-import dp from '../../assets/macbook-pro.svg';
 
 Modal.setAppElement('#root');
 
@@ -54,20 +50,6 @@ const AddLead = ({ createLead, show, onClose }) => {
             setCanUncheck(true);
         }
     },[selectedOportunities]);
-    // function handleCheckboxAll(state){
-    //     if(allOportunities){
-    //         setSelectedOportunities(()=>{
-    //             const op = oportunities.map(o => o.job);
-    //             return [...op];
-    //         });
-    //     }
-    //     else{
-    //         if(state){
-    //             return;
-    //         }
-    //         setSelectedOportunities([]);
-    //     }
-    // }
 
     function handleInput(event){
         let nam = event.target.name;
@@ -80,40 +62,16 @@ const AddLead = ({ createLead, show, onClose }) => {
         if(op==="all"){
             setAllOportunities(!allOportunities);
             setCanUncheck(false);
-            // handleCheckboxAll(true);
             return;
         }
         const alreadySelected = selectedOportunities.findIndex( item => item === op );
 
         if (alreadySelected >= 0){
             const filteredItens = selectedOportunities.filter(item => item !== op);
-            setSelectedOportunities(filteredItens);
+            setSelectedOportunities([filteredItens]);
             
         }else {
             setSelectedOportunities([...selectedOportunities, op]);
-        }
-    }
-
-    function handleImage(job){
-        let image;
-        switch(job){
-            case "RPA":
-                image = rpa;
-                return image;
-            
-            case "Analytics":
-                image = analytics;
-                return image;
-            
-            case "BPM":
-                image = bpm;
-                return image;
-
-            case "Produto Digital":
-                image = dp;
-                return image;
-            default:
-                return "";
         }
     }
 
@@ -160,6 +118,7 @@ const AddLead = ({ createLead, show, onClose }) => {
                         type='text'
                         name='costumerEmail'
                         onChange={handleInput}
+                        placeholder='email@email.com'
                         required
                     />
                     <p>Telefone *</p>
@@ -167,6 +126,7 @@ const AddLead = ({ createLead, show, onClose }) => {
                         type='text'
                         name='costumerPhone'
                         onChange={handleInput}
+                        placeholder='xx xxxxx-xxxx'
                         required
                     />
                     <p>Oportunidades:</p>
@@ -184,7 +144,6 @@ const AddLead = ({ createLead, show, onClose }) => {
                                 onClick={() => handleCheckbox(item.job)}
                                 className={selectedOportunities.includes(item.job) ? "selected":""}
                             >
-                                <img src={handleImage(item.job)} alt={item.job}/>
                                 <span>{item.job}</span>
                             </li>
                         ))}
